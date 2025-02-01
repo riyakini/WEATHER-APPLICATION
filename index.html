@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Weather Web App</title>
+   <link
+   href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap"
+   rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+   <script src="index.js"></script>
+</style>
+<script src="https://maps.googleapis.com/maps/api/js?callback=initmap&key=AIzaSyAKDH8lBguYjiq5JSh8pshJzNiCdSMUdRE" defer></script>
+</head>
+<body>
+   <div class="card">
+      <div class="search">
+         <input type="text" placeholder="Enter city name" spellcheck="false">
+         <button><img src="search.png" > </button>
+      </div>
+      <div class="error">Invalid City Name</div>
+      <div class="weather">
+         <img src="rain.png" class="weather-icon">
+         <h1 class="temp">22°C</h1>
+         <h2 class="city">New York</h2>
+         <!--<div class="content">
+            <div class="date-time">
+              <h1 class="time">
+                00:00:00
+              </h1>
+              <h2 class="date">
+          
+              </h2>
+            </div>
+         </div>-->
+         <div class="details">
+            <div class="col">
+               <img src="humidity.png">
+               <div>
+                  <p class="humidity">50% </p>
+                  <p>Humidity</p>
+               </div>
+            </div>
+            <div class="col">
+               <img src="wind.png">
+               <div>
+                  <p class="wind">15 km/h</p>
+                  <p>Wind Speed</p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <script>
+      const apiKey="5f840ecb301054605b14fd4dd2a7f939";
+      const apiUrl="https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+
+      const searchBox=document.querySelector(".search input");
+      const searchBtn=document.querySelector(".search button");
+      const weatherIcon=document.querySelector(".weather-icon");
+     
+      async function checkWeather(city){
+         const response=await fetch(apiUrl+city+`&appid=${apiKey}`);
+
+         if(response.status==404){
+            document.querySelector(".error").style.display ="block";
+            document.querySelector(".weather").style.display ="none";
+         }
+         else{
+            var data=await response.json();
+         
+         
+         document.querySelector(".city").innerHTML=data.name;
+         document.querySelector(".temp").innerHTML=Math.round(data.main.temp) +"°C";
+         document.querySelector(".humidity").innerHTML=data.main.humidity+"%";
+         document.querySelector(".wind").innerHTML=data.wind.speed+"km/h";
+         
+        
+         if(data.weather[0].main == "Clouds"){
+            weatherIcon.src = "clouds.png";
+
+         }
+         else if(data.weather[0].main == "Clear"){
+            weatherIcon.src = "clear.png";
+         }
+         else if(data.weather[0].main == "Rain"){
+            weatherIcon.src = "rain.png";
+         }
+         else if(data.weather[0].main == "Drizzle"){
+            weatherIcon.src = "drizzle.png";
+         }
+         else if(data.weather[0].main == "Mist"){
+            weatherIcon.src = "mist.png";
+         }
+
+         document.querySelector(".weather").style.display = "block";
+         }
+         var data=await response.json();
+         
+
+         document.querySelector(".city").innerHTML=data.name;
+         document.querySelector(".temp").innerHTML=Math.round(data.main.temp) +"°C";
+         document.querySelector(".humidity").innerHTML=data.main.humidity+"%";
+         document.querySelector(".wind").innerHTML=data.wind.speed+"km/h";
+         
+         if(data.weather[0].main == "Clouds"){
+            weatherIcon.src = "clouds.png";
+
+         }
+         else if(data.weather[0].main == "Clear"){
+            weatherIcon.src = "clear.png";
+         }
+         else if(data.weather[0].main == "Rain"){
+            weatherIcon.src = "rain.png";
+         }
+         else if(data.weather[0].main == "Drizzle"){
+            weatherIcon.src = "drizzle.png";
+         }
+         else if(data.weather[0].main == "Mist"){
+            weatherIcon.src = "mist.png";
+         }
+   
+
+         document.querySelector(".weather").style.display = "block";
+         document.querySelector(".error").style.display ="none";
+      }
+
+
+
+      searchBtn.addEventListener("click",()=>{
+         checkWeather(searchBox.value);
+      })
+
+      checkWeather();
+
+
+
+      setInterval(() => {
+  // 12Hr Format For Hour
+  function twilveFormat(hour) {
+    if (hour >= 13) {
+      return hour % 12;
+    } else {
+      return hour;
+    }
+  }
+
+  function isAM_PM(hour) {
+    if (hour >= 12) {
+      return "PM";
+    } else {
+      return "AM";
+    }
+  }
+
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursay",
+    "Friday",
+    "Saturday"
+  ];
+  const months = [
+    "Jan",
+    "Feb",
+    "March",
+    "Apr",
+    "May",
+    "Jun",
+    "July",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ];
+
+  const time = new Date();
+
+  const date = time.getDate();
+  const month = time.getMonth();
+  const day = time.getDay();
+  const min = time.getMinutes();
+  const sec = time.getSeconds();
+  const hour = time.getHours();
+  const hourIn12HR = twilveFormat(hour);
+  const isAM = isAM_PM(hour);
+
+  // Time
+  document.querySelector(
+    ".content .date-time .time"
+  ).innerHTML = `${hourIn12HR}:${min}:${sec} <span id='AM_PM'>${isAM}</span>`;
+
+  // Date
+
+  document.querySelector(
+    ".content .date-time .date"
+  ).innerHTML = `${days[day]}, ${date} ${months[month]}`;
+}, 1000);
+   </script>
+
+<div id="mapCanvas"></div>
+</style>
+
+
+
+</body>
+</html>
