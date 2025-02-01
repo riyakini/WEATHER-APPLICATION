@@ -60,12 +60,12 @@ By working on this project, I gained hands-on experience in:
 
 ✅ Implementing real-world error handling.
 
-OUTPUT:
-
-![Image](https://github.com/user-attachments/assets/fec75a7a-f223-47c9-94a9-15ff0490d6a0)
-
 ✅ Improving UI/UX with CSS and JavaScript.
 
 This project was completed as part of my internship at CodTech.
+
+OUTPUT:
+
+![Image](https://github.com/user-attachments/assets/fec75a7a-f223-47c9-94a9-15ff0490d6a0)
 
  
