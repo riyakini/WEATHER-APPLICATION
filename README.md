@@ -18,10 +18,15 @@ The Weather Application is a simple yet effective web app that fetches real-time
 I created a new project folder and initialized it in VS Code. The project structure was organized as follows:
 
 /WEATHER-APPLICATION
+
  ├── index.html
+ 
  ├── style.css
+ 
  ├── script.js
+ 
  ├── README.md
+ 
  ├── assets (for icons or images)
 
 used HTML, CSS, and JavaScript to build the app, ensuring a clean and minimal UI for better usability.
@@ -48,9 +53,13 @@ API failures: Logs errors to the console if the API request fails.
 This Weather Application was a great project that helped me strengthen my skills in JavaScript, API integration, and responsive web design. The final product is a fully functional and visually appealing weather app that provides users with real-time weather updates.
 
 By working on this project, I gained hands-on experience in:
+
 ✅ Fetching data from an external API.
+
 ✅ Handling asynchronous JavaScript (fetch and async/await).
+
 ✅ Implementing real-world error handling.
+
 ✅ Improving UI/UX with CSS and JavaScript.
 
 This project was completed as part of my internship at CodTech.
